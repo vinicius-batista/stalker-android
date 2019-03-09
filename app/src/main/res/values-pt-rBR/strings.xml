@@ -3,4 +3,12 @@
     <string name="app_name">Stalker</string>
     <string name="btn_new">NOVO</string>
     <string name="btn_list">LISTAR</string>
+    <string name="btn_save">ENVIAR</string>
+    <string name="firstName">Nome</string>
+    <string name="lastName">Sobrenome</string>
+    <string name="age">Idade</string>
+    <string name="job">Profissao</string>
+    <string name="birthday">Data de nascimento</string>
+    <string name="phone">Telefone</string>
+    <string name="description">Descricao</string>
 </resources>
