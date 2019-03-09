@@ -19,4 +19,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), NewPersonActivity.class);
         startActivity(intent);
     }
+
+    public void onClickList (View v) {
+        Intent intent = new Intent(getBaseContext(), PeopleActivity.class);
+        startActivity(intent);
+    }
 }
