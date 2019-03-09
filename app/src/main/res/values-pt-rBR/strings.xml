@@ -4,8 +4,8 @@
     <string name="btn_new">NOVO</string>
     <string name="btn_list">LISTAR</string>
     <string name="btn_save">ENVIAR</string>
-    <string name="firstName">Nome</string>
-    <string name="lastName">Sobrenome</string>
+    <string name="first_name">Nome</string>
+    <string name="last_name">Sobrenome</string>
     <string name="age">Idade</string>
     <string name="job">Profissao</string>
     <string name="birthday">Data de nascimento</string>

@@ -41,9 +41,9 @@ public class PeopleActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(getBaseContext(), ShowPersonActivity.class);
-//                    intent.putExtra(PERSON_KEY, person);
-//                    startActivity(intent);
+                  Intent intent = new Intent(getBaseContext(), ShowPersonActivity.class);
+                  intent.putExtra(PERSON_KEY, person);
+                  startActivity(intent);
                 }
             });
 

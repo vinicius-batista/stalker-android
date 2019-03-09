@@ -3,8 +3,8 @@
     <string name="btn_new">NEW</string>
     <string name="btn_list">LIST</string>
     <string name="btn_save">SAVE</string>
-    <string name="firstName">First Name</string>
-    <string name="lastName">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="age">Age</string>
     <string name="job">Job</string>
     <string name="birthday">Birthday</string>
