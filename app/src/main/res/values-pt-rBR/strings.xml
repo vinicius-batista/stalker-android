@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Stalker</string>
+    <string name="btn_new">NOVO</string>
+    <string name="btn_list">LISTAR</string>
+</resources>
