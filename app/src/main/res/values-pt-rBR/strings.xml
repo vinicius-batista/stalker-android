@@ -12,4 +12,5 @@
     <string name="phone">Telefone</string>
     <string name="description">Descricao</string>
     <string name="years_old">anos</string>
+    <string name="take_a_pic">TIRAR FOTO</string>
 </resources>

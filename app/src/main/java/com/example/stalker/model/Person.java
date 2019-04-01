@@ -1,5 +1,6 @@
 package com.example.stalker.model;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,6 +12,7 @@ public class Person implements Parcelable {
     private int age;
     private String birthday;
     private String phone;
+    private Bitmap pic;
 
     protected Person(Parcel in) {
         firstName = in.readString();
@@ -20,9 +22,10 @@ public class Person implements Parcelable {
         age = in.readInt();
         birthday = in.readString();
         phone = in.readString();
+        pic = in.readParcelable(Bitmap.class.getClassLoader());
     }
 
-    public Person(String firstName, String lastName, String job, String description, int age, String birthday, String phone) {
+    public Person(String firstName, String lastName, String job, String description, int age, String birthday, String phone, Bitmap pic) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.job = job;
@@ -30,6 +33,7 @@ public class Person implements Parcelable {
         this.age = age;
         this.birthday = birthday;
         this.phone = phone;
+        this.pic = pic;
     }
 
     @Override
@@ -41,6 +45,7 @@ public class Person implements Parcelable {
         dest.writeInt(age);
         dest.writeString(birthday);
         dest.writeString(phone);
+        dest.writeParcelable(pic, flags);
     }
 
     @Override
@@ -115,5 +120,13 @@ public class Person implements Parcelable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Bitmap getPic() {
+        return pic;
+    }
+
+    public void setPic(Bitmap pic) {
+        this.pic = pic;
     }
 }
