@@ -97,10 +97,9 @@
         android:layout_height="wrap_content"
         android:textSize="18sp" />
 
-    <ImageView
-        android:id="@+id/imgPic"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvGalleryShow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="5dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_height="match_parent" />
+
 </LinearLayout>

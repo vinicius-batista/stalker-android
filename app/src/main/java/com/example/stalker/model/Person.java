@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 public class Person implements Parcelable {
     private String firstName;
     private String lastName;
@@ -12,7 +14,7 @@ public class Person implements Parcelable {
     private int age;
     private String birthday;
     private String phone;
-    private Bitmap pic;
+    private ArrayList<Bitmap> pictures;
 
     protected Person(Parcel in) {
         firstName = in.readString();
@@ -22,10 +24,10 @@ public class Person implements Parcelable {
         age = in.readInt();
         birthday = in.readString();
         phone = in.readString();
-        pic = in.readParcelable(Bitmap.class.getClassLoader());
+        pictures = in.createTypedArrayList(Bitmap.CREATOR);
     }
 
-    public Person(String firstName, String lastName, String job, String description, int age, String birthday, String phone, Bitmap pic) {
+    public Person(String firstName, String lastName, String job, String description, int age, String birthday, String phone, ArrayList<Bitmap> pictures) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.job = job;
@@ -33,7 +35,7 @@ public class Person implements Parcelable {
         this.age = age;
         this.birthday = birthday;
         this.phone = phone;
-        this.pic = pic;
+        this.pictures = pictures;
     }
 
     @Override
@@ -45,7 +47,7 @@ public class Person implements Parcelable {
         dest.writeInt(age);
         dest.writeString(birthday);
         dest.writeString(phone);
-        dest.writeParcelable(pic, flags);
+        dest.writeTypedList(pictures);
     }
 
     @Override
@@ -122,11 +124,11 @@ public class Person implements Parcelable {
         this.phone = phone;
     }
 
-    public Bitmap getPic() {
-        return pic;
+    public ArrayList<Bitmap> getPictures() {
+        return pictures;
     }
 
-    public void setPic(Bitmap pic) {
-        this.pic = pic;
+    public void setPictures(ArrayList<Bitmap> pictures) {
+        this.pictures = pictures;
     }
 }

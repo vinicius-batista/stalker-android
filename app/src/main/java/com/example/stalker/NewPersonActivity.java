@@ -4,16 +4,25 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.stalker.data.DAOPerson;
 import com.example.stalker.model.Person;
+import com.example.stalker.view.GalleryAdapter;
+import com.example.stalker.view.PhotoOpenDialogFragment;
 
-public class NewPersonActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class NewPersonActivity extends AppCompatActivity implements GalleryAdapter.GalleryListener {
 
     private static final int CAMERA_REQUEST_CODE = 223;
 
@@ -24,13 +33,19 @@ public class NewPersonActivity extends AppCompatActivity {
     private EditText ptxtBD;
     private EditText ptxtPH;
     private EditText ptxtDE;
-    private ImageView imgPic;
-    private Bitmap pic;
+    private RecyclerView rvGallery;
+    private GalleryAdapter galleryAdapter;
+    private PhotoOpenDialogFragment photoOpenDialogFragment;
+    private ArrayList<Bitmap> pictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_person);
+
+        this.createGallery();
+        this.photoOpenDialogFragment = new PhotoOpenDialogFragment();
+        this.pictures = new ArrayList<>();
 
         this.ptxtFN = findViewById(R.id.ptxtFN);
         this.ptxtLN = findViewById(R.id.ptxtLN);
@@ -39,7 +54,22 @@ public class NewPersonActivity extends AppCompatActivity {
         this.ptxtBD = findViewById(R.id.ptxtBD);
         this.ptxtPH = findViewById(R.id.ptxtPH);
         this.ptxtDE = findViewById(R.id.ptxtDE);
-        this.imgPic = findViewById(R.id.imgPic);
+
+    }
+
+    private void createGallery() {
+        this.rvGallery = (RecyclerView) this.findViewById(R.id.rvGalleryAdd);
+        this.galleryAdapter = new GalleryAdapter(this);
+
+        Display display = this.getWindowManager().getDefaultDisplay();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int spanCount = (int) Math.ceil(dpWidth / 100);
+
+        this.rvGallery.setLayoutManager(new GridLayoutManager(this, spanCount));
+        this.rvGallery.setHasFixedSize(true);
+        this.rvGallery.setAdapter(this.galleryAdapter);
     }
 
     public void takePic (View v) {
@@ -55,8 +85,8 @@ public class NewPersonActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             if (extras != null && extras.containsKey("data")) {
                 Bitmap bmp = (Bitmap) extras.get("data");
-                imgPic.setImageBitmap(bmp);
-                this.pic = bmp;
+                this.pictures.add(bmp);
+                this.galleryAdapter.setPicList(this.pictures);
             }
         }
     }
@@ -70,10 +100,17 @@ public class NewPersonActivity extends AppCompatActivity {
         String birthday = this.ptxtBD.getText().toString();
         String phone = this.ptxtPH.getText().toString();
 
-        Person person = new Person(firstName, lastName, job, description, age, birthday, phone, this.pic);
+        Person person = new Person(firstName, lastName, job, description, age, birthday, phone, this.pictures);
 
         DAOPerson.getINSTANCE().addPerson(person);
 
         finish();
+    }
+
+    @Override
+    public void onClickPhoto(Bitmap pic) {
+        this.photoOpenDialogFragment.setBitmap(pic);
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        this.photoOpenDialogFragment.show(fragmentManager, "showpic");
     }
 }
